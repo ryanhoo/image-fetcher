@@ -3,7 +3,8 @@ var fs = require('fs'),
     Utils = require('./Utils');
 var saveImage = Utils.saveImage,
     saveImages = Utils.saveImages,
-    parseMapUrl = Utils.parseMapUrl;
+    parseMapUrl = Utils.parseMapUrl,
+    saveJson = Utils.saveJson;
 
 var ACT = 'activity',
   POI = 'poi',
@@ -134,20 +135,31 @@ exports.requestDetailsData = function(requestUrl) {
       if (json.result) {
         console.log(json)
         console.log('start processing result...')
+        var filename
+
         if (type === POI) {
           var poi = json.result
           handlePOI(poi)
+
+          filename = 'poi.detail_id_' + poi.id + '.json'
         }
 
         if (type === ACT) {
           var act = json.result
           handleACT(act)
+
+          filename = 'activity.detail_id_' + act.id + '.json'
         }
 
         if (type === TOPIC) {
           var topic = json.result
           handleTOPIC(topic)
+
+          filename = 'topic.detail_id_' + topic.id + '.json'
         }
+
+        if (filename)
+          saveJson(filename, JSON.stringify(json.result))
       }
     })
   })

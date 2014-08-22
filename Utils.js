@@ -1,4 +1,7 @@
-var fs = require('fs'), http = require('http'), crypto = require('crypto'), exec = require('child_process').exec
+var fs = require('fs'),
+  http = require('http'),
+  crypto = require('crypto'),
+  exec = require('child_process').exec
 
 var IMG_FOLDER = 'images/'
 var JSON_FOLDER = 'json/'
@@ -22,14 +25,14 @@ var md5 = function(url) {
 var parseFileName = function(url) {
   var result = url.split(HOST)
   if (result.length > 1) {
-      var newName = result[1].replace(/\//g, '_')
-      return newName
+    var newName = result[1].replace(/\//g, '_')
+    return newName
   }
 }
 
 // 保存一个数组的图片到本地
 var saveImages = function(urls) {
-  urls.forEach(function(url){
+  urls.forEach(function(url) {
     saveImage(url)
   })
 }
@@ -41,7 +44,7 @@ var saveImage = function(url, isMapImage) {
     res.setEncoding('binary')
 
     res.on('data', function(chunk) {
-        imgData += chunk
+      imgData += chunk
     })
 
     res.on('end', function() {
@@ -51,14 +54,25 @@ var saveImage = function(url, isMapImage) {
       else
         filename = parseFileName(url)
       fs.writeFile(IMG_FOLDER + filename, imgData, 'binary', function(err) {
-          if (err) throw err
+        if (err)
+          console.log('error: ' + err)
+        else
           console.log('File saved on path ' + filename)
       })
     })
   })
 
   req.on('error', function(err) {
-      console.log(err)
+    console.log(err)
+  })
+}
+
+var saveJson = function(filename, jsonStr) {
+  fs.writeFile(JSON_FOLDER + filename, jsonStr, function(err) {
+    if (err)
+      console.log('error: ' + err)
+    else
+      console.log('File saved on path ' + JSON_FOLDER + filename)
   })
 }
 
@@ -68,3 +82,4 @@ exports.md5 = md5
 exports.parseFileName = parseFileName
 exports.saveImages = saveImages
 exports.saveImage = saveImage
+exports.saveJson = saveJson

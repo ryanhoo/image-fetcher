@@ -22,8 +22,11 @@ Constants.POI_DETAILS_ARRAY.forEach(function(item){
   Processor.requestDetailsData(item)
 })
 
-// test save topic list
+// test save topic list and details
 Processor.requestListData(Constants.TOPIC_LIST)
+Constants.TOPIC_DETAILS_ARRAY.forEach(function(item){
+  Processor.requestDetailsData(item)
+})
 
 // test save feed list
 Processor.requestListData(Constants.FEED_LIST)
