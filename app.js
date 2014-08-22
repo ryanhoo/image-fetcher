@@ -6,22 +6,6 @@ console.log('start processing...')
 
 Utils.initFolders()
 
-// test parse map url
-// var mapUrl = 'http://restapi.amap.com/v3/staticmap?location=119.077678,29.603685&zoom=12&size=700*200&markers=-1,http://www.wanzhoumo.com/assets/app/sign.png,A:119.077678,29.603685&key=48874191750929ccfd1c9802c2e56846'
-// var url = Utils.parseMapUrl(mapUrl)
-// console.log(url)
-
-// test md5
-// var md5 = Utils.md5(url)
-// console.log(md5)
-
-// test save image
-// Utils.saveImages(url)
-// Utils.saveImage(url, true)
-
-// test save images
-// Utils.saveImages([url])
-
 // test save valid act list and details
 // console.log(Constants.ACT_LIST_VALID)
 Processor.requestListData(Constants.ACT_LIST_VALID)
