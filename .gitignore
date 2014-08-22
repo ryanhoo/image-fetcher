@@ -1,4 +1,6 @@
 .DS_Store
 *.zip
 Constants.js
-request.txt
+requests.txt
+images/
+json/
